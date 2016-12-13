@@ -1,15 +1,16 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import EventList from './reducers/index'
+import App from './components/App'
 
-if (process.env.NODE_ENV !== 'production') {
-  React.Perf = require('react-addons-perf')
-}
+const store = createStore()(eventList, window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const page = (
-  <div>
-    <h1>Welcome to Code 501</h1>
-    <h2>Building Web Apps with React + Redux</h2>
-  </div>
+const wrappedApp = (
+  <Provider store={store}>
+      <App />
+  </Provider>
 )
 
-render(page, document.getElementById('app'))
+render(wrappedApp, document.getElementById('app'))
